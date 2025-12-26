@@ -96,6 +96,8 @@ datasets/ <br>
     │   ├── Samyukta_Hastas/ <br>
     │   └── ... <br>
 
+    (For now I have only used 10 mudras from Asamyukta Hastas(single-hand gestures))
+
 ---
 
 ## Training Details
@@ -217,9 +219,3 @@ Built as a learning-focused project to understand machine learning systems end-t
 This project is intended for educational and research purposes.
 
 ---
-
-If you want, next I can:
-
-* compress this to a **short recruiter-friendly README**
-* add a **visual pipeline diagram**
-* or write a **2-minute project explanation** you can speak in interviews
