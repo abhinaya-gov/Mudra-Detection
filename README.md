@@ -1,6 +1,6 @@
 
 <p align="center">
-  <a href="#why-this-model-architecture">
+  <a href="#model-architecture">
     <img src="https://img.shields.io/badge/Architecture-View-blue?style=for-the-badge" />
   </a>
   <a href="#dataset">
@@ -164,7 +164,7 @@ datasets/ <br>
 
 ---
 
-## Training Details
+## Model Architecture
 
 ### Hand Detection
 
@@ -180,12 +180,15 @@ datasets/ <br>
 
 ### Mudra Classification
 
-* Model: Custom CNN (implemented from scratch)
+* Model: VGG Inspired CNN (implemented from scratch)
 * Architecture:
+- 5 convolutional blocks with channels: 32 → 64 → 128 → 256 → 256  
+- Each block: `Conv(3×3) → ReLU → BatchNorm → Conv(3×3) → ReLU → BatchNorm`  
+- MaxPooling for downsampling (2×2 in early layers, 3×3 in deeper layers)  
+- Final feature map: 256 × 3 × 3 → fully connected classifier  
 
-  * Stacked convolutional blocks with BatchNorm and ReLU
-  * Progressive spatial downsampling
-  * Fully connected classification head
+This design preserves subtle finger details while remaining lightweight and trainable from scratch on a small dataset.
+
 * Training:
 
   * Random rotations, flips, and color jitter
