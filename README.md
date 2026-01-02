@@ -4,7 +4,7 @@
     <img src="https://img.shields.io/badge/Architecture-View-blue?style=for-the-badge" />
   </a>
   <a href="#dataset">
-    <img src="https://img.shields.io/badge/How%20It%20Works-Explore-green?style=for-the-badge" />
+    <img src="https://img.shields.io/badge/Dataset-Explore-green?style=for-the-badge" />
   </a>
   <a href="#future-enhancements">
     <img src="https://img.shields.io/badge/Future%20Plans-Roadmap-orange?style=for-the-badge" />
@@ -185,7 +185,10 @@ datasets/ <br>
 - 5 convolutional blocks with channels: 32 → 64 → 128 → 256 → 256  
 - Each block: `Conv(3×3) → ReLU → BatchNorm → Conv(3×3) → ReLU → BatchNorm`  
 - MaxPooling for downsampling (2×2 in early layers, 3×3 in deeper layers)  
-- Final feature map: 256 × 3 × 3 → fully connected classifier  
+- Final feature map: 256 × 3 × 3 → fully connected classifier
+
+<img width="4154" height="1436" alt="image" src="https://github.com/user-attachments/assets/53d33843-452f-410f-a715-43efe6468e74" />
+
 
 This design preserves subtle finger details while remaining lightweight and trainable from scratch on a small dataset.
 
