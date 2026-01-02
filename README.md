@@ -1,15 +1,16 @@
 
 <p align="center">
-  <a href="#-model-architecture">
+  <a href="#why-this-model-architecture">
     <img src="https://img.shields.io/badge/Architecture-View-blue?style=for-the-badge" />
   </a>
-  <a href="#-dataset">
+  <a href="#dataset">
     <img src="https://img.shields.io/badge/How%20It%20Works-Explore-green?style=for-the-badge" />
   </a>
-  <a href="#-future-enhancements">
+  <a href="#future-enhancements">
     <img src="https://img.shields.io/badge/Future%20Plans-Roadmap-orange?style=for-the-badge" />
   </a>
 </p>
+
 
 
 # Mudra Detection Pipeline
