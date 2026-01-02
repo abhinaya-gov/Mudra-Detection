@@ -1,3 +1,17 @@
+
+<p align="center">
+  <a href="#-model-architecture">
+    <img src="https://img.shields.io/badge/Architecture-View-blue?style=for-the-badge" />
+  </a>
+  <a href="#-dataset">
+    <img src="https://img.shields.io/badge/How%20It%20Works-Explore-green?style=for-the-badge" />
+  </a>
+  <a href="#-future-enhancements">
+    <img src="https://img.shields.io/badge/Future%20Plans-Roadmap-orange?style=for-the-badge" />
+  </a>
+</p>
+
+
 # Mudra Detection Pipeline
 
 An end-to-end computer vision system for **hand mudra detection**, built using a **two-stage pipeline**:
@@ -17,6 +31,30 @@ Mudra recognition is a fine-grained vision task:
 
 A single end-to-end classifier struggles with these constraints.
 To address this, the problem is decomposed into **detection → classification**, improving robustness and interpretability.
+
+---
+
+## Why This Project?
+
+This project was built to explore a more complex, real-world computer vision pipeline that goes beyond simple image classification.
+
+Unlike the hand/no-hand classifier, this system combines **object detection + classification + explainability** into a single end-to-end pipeline for recognizing Bharatanatyam mudras in real time.
+
+The main goals of this project were:
+
+- To design and implement a **multi-stage vision system** (detection → classification → interpretation).
+- To gain practical experience with **YOLO-style object detection** and region-based inference.
+- To work with a culturally meaningful dataset (Indian classical dance mudras) rather than generic benchmarks.
+- To understand how detection and classification models interact in a production-like pipeline.
+- To explore model explainability using tools like **Grad-CAM**.
+
+This project also serves as a foundation for:
+- Sign and gesture recognition systems
+- Human-computer interaction
+- Assistive technologies
+- Cultural heritage digitization
+
+Overall, this was built as both a **technical learning project** and a **meaningful application of deep learning to real-world visual understanding**.
 
 ---
 
@@ -73,6 +111,31 @@ mudra-detection/ <br>
   * Different directory layouts
   * Dataset imbalance
 * A unified YOLO configuration was generated programmatically
+  
+This project uses a combination of real and synthetic hand image datasets to train and evaluate a **binary hand detection model (hand vs no-hand)**.
+
+### Hand-Bo3ot (Roboflow Universe)
+A general-purpose hand detection dataset with bounding box annotations across different poses, lighting conditions, and backgrounds. Used as the primary dataset for training the detector.  
+https://universe.roboflow.com/yolov4tiny-wzb2k/hand-bo3ot
+
+### Bharatanatyam Mudras (Roboflow Universe)
+Contains annotated images of classical Indian hand gestures (mudras). Used to add diversity in hand shapes, orientations, and fine-grained poses.  
+https://universe.roboflow.com/mudras-avdrb/bharatanatyam-mudras-fg9qo-gcruc
+
+### Hand Gesture Dataset (Roboflow Universe)
+A collection of hand gesture images used for additional data exploration and optional augmentation.  
+https://universe.roboflow.com/horyzn-qhfq4/hand-gesture-gizg2
+
+### Hand Detection Dataset — VOC/YOLO Format (Kaggle)
+A ready-to-use dataset in VOC/YOLO format for standard object detection training and benchmarking.  
+https://www.kaggle.com/datasets/nomihsa965/hand-detection-dataset-vocyolo-format/data
+
+### Synthetic Hand Detection Dataset (Kaggle)
+A synthetic dataset used to improve generalization and robustness, especially for rare poses and edge cases.  
+https://www.kaggle.com/datasets/zeyadkhalid/hand-detection
+
+These datasets together provide a mix of real-world variability and synthetic augmentation, helping the model generalize better across different environments, poses, and lighting conditions.
+
 
 ### Mudra Classification
 
@@ -129,6 +192,47 @@ datasets/ <br>
 * Output:
 
   * Mudra class probabilities via softmax
+
+---
+
+## Why This Model Architecture?
+
+This project uses a two-stage architecture:
+
+1. A **YOLO-based object detector** to locate hands in the image.
+2. A **custom CNN classifier** to recognize the specific mudra from the detected hand region.
+
+This separation was chosen intentionally:
+
+- Detection and classification solve different problems and benefit from specialized architectures.
+- YOLO is optimized for fast and accurate localization.
+- A custom CNN allows fine-grained control over gesture recognition features.
+
+### Architectural Design Choices
+
+- **YOLO for detection**  
+  Provides real-time performance and robust bounding box predictions across varying backgrounds.
+
+- **Custom CNN for classification**  
+  Enables targeted learning of subtle finger and hand shape variations between mudras.
+
+- **Two-stage pipeline**  
+  Improves robustness by isolating the gesture classification task from background noise.
+
+- **Grad-CAM integration**  
+  Allows visualization of which regions influence the model’s predictions, improving interpretability and debugging.
+
+### Why Not an End-to-End Single Model?
+
+An end-to-end model could jointly learn detection and classification, but:
+
+- It requires significantly more data.
+- It is harder to debug and interpret.
+- It is more complex to train and tune.
+
+The two-stage approach provides better modularity, interpretability, and flexibility for experimentation and improvement.
+
+Overall, this architecture balances **performance, modularity, interpretability, and learning value**, making it well-suited for gesture recognition tasks.
 
 ---
 
@@ -196,13 +300,20 @@ These constraints directly influenced model and pipeline design choices.
 
 ---
 
-## Future Improvements
+## Future Enhancements
 
-* Temporal smoothing across video frames
-* Multi-hand and simultaneous mudra support
-* Improved dataset diversity
-* Model optimization for faster inference
-* Better detection of hands when smaller
+Planned or possible improvements for this project include:
+
+- Expand the mudra dataset to include more dancers, lighting conditions, and camera angles.
+- Add **temporal modeling** (LSTM / 3D CNN / Transformers) to capture motion dynamics in gestures.
+- Add multi-hand interaction support.
+- Improve detection accuracy for occluded or partially visible hands.
+- Deploy the pipeline as a web app or mobile app.
+- Add multilingual explanations of mudras and their meanings.
+- Add continuous learning from user feedback.
+
+These enhancements aim to evolve the project from a research and learning system into a more robust, scalable, and user-facing application.
+
 
 ---
 
